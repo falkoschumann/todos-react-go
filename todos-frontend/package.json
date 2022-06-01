@@ -6,22 +6,41 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "flow-bin": "^0.179.0",
+    "flow-typed": "^3.7.0",
+    "prettier": "^2.6.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "all": "npm run build && npm run test && npm run analyze",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test --watchAll=false",
+    "test:watch": "react-scripts test",
+    "eject": "react-scripts eject",
+    "analyze": "npm run prettier && npm run eslint && npm run flow",
+    "flow": "flow",
+    "prettier": "prettier --check src",
+    "prettier:write": "prettier --write src",
+    "eslint": "eslint src",
+    "eslint:fix": "eslint --fix src"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "sort-imports": [
+        "error",
+        {
+          "allowSeparatedGroups": true
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [

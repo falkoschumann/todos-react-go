@@ -1,0 +1,15 @@
+[ignore]
+<PROJECT_ROOT>/build/
+<PROJECT_ROOT>/node_modules/
+
+[include]
+<PROJECT_ROOT>/src/
+
+[libs]
+
+[lints]
+
+[options]
+react.runtime=automatic
+
+[strict]
