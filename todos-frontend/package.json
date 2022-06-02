@@ -10,6 +10,8 @@
     "@types/node": "^16.11.38",
     "@types/react": "^18.0.10",
     "@types/react-dom": "^18.0.5",
+    "classnames": "^2.3.1",
+    "prettier": "^2.6.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-scripts": "5.0.1",
@@ -17,17 +19,33 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "all": "npm run build && npm run test && npm run analyze",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test --watchAll=false",
+    "test:watch": "react-scripts test",
+    "eject": "react-scripts eject",
+    "analyze": "npm run prettier:check && npm run eslint",
+    "prettier:check": "prettier --check .",
+    "prettier:write": "prettier --write .",
+    "eslint": "eslint src",
+    "eslint:fix": "eslint --fix src"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "sort-imports": [
+        "warn",
+        {
+          "allowSeparatedGroups": true
+        }
+      ]
+    }
   },
+  "proxy": "http://localhost:8080",
   "browserslist": {
     "production": [
       ">0.2%",
