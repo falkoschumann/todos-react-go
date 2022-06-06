@@ -1,5 +1,4 @@
-// Package spa defines a handler to serve a single page application.
-package spa
+package portal
 
 import (
 	"log"
@@ -10,15 +9,15 @@ import (
 	"regexp"
 )
 
-// A Handler serves a single page application from static files.
 type Handler struct {
-	// Root path of static content, using default "www" if not set.
 	StaticPath string
-	// Path to index of SPA, using default "index.html" if not set.
-	IndexPath string
+	IndexPath  string
 }
 
-// ServeHTTP delivers existing files or redirect to index.
+func NewSpaHandler() *Handler {
+	return &Handler{StaticPath: "www", IndexPath: "index.html"}
+}
+
 func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	path, err := absPath(r.URL)
 	if err != nil {
@@ -27,24 +26,15 @@ func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	staticPath := "www"
-	if h.StaticPath != "" {
-		staticPath = h.StaticPath
-	}
-	indexPath := "index.html"
-	if h.IndexPath != "" {
-		indexPath = h.IndexPath
-	}
-
-	path = filepath.Join(staticPath, path)
+	path = filepath.Join(h.StaticPath, path)
 	_, err = os.Stat(path)
 	if os.IsNotExist(err) {
-		http.ServeFile(w, r, filepath.Join(staticPath, indexPath))
+		http.ServeFile(w, r, filepath.Join(h.StaticPath, h.IndexPath))
 	} else if err != nil {
 		log.Println("File not readable:", path, "- Error:", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	} else {
-		http.FileServer(http.Dir(staticPath)).ServeHTTP(w, r)
+		http.FileServer(http.Dir(h.StaticPath)).ServeHTTP(w, r)
 	}
 }
 

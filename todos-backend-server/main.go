@@ -6,7 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	"todos_backend_server/spa"
+	"todos_backend_server/adapter/portal"
+	"todos_backend_server/adapter/provider"
+	"todos_backend_server/messagehandler"
 )
 
 func main() {
@@ -23,7 +25,15 @@ func parseFlags() (host string, port uint) {
 }
 
 func createRouter() {
-	http.Handle("/", spa.Handler{})
+	repo := provider.NewJsonTodosRepository("./data/todos.json")
+	http.Handle("/", portal.NewSpaHandler())
+	http.HandleFunc("/api/todos/add-todo", portal.GetAddTodo(messagehandler.GetAddTodo(repo)))
+	http.HandleFunc("/api/todos/clear-completed", portal.GetClearCompleted(messagehandler.GetClearCompleted(repo)))
+	http.HandleFunc("/api/todos/destroy-todo", portal.GetDestroyTodo(messagehandler.GetDestroyTodo(repo)))
+	http.HandleFunc("/api/todos/save-todo", portal.GetSaveTodo(messagehandler.GetSaveTodo(repo)))
+	http.HandleFunc("/api/todos/select-todos", portal.GetSelectTodos(messagehandler.GetSelectTodos(repo)))
+	http.HandleFunc("/api/todos/toggle-all", portal.GetToggleAll(messagehandler.GetToggleAll(repo)))
+	http.HandleFunc("/api/todos/toggle-todo", portal.GetToggleTodo(messagehandler.GetToggleTodo(repo)))
 }
 
 func runServer(host string, port uint) {

@@ -1,2 +1,4 @@
-build/
+/build/
+/data/
 /*todos_backend_server*
+/coverage.out

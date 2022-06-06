@@ -1,10 +1,21 @@
 import { render, screen } from "@testing-library/react";
-import React from "react";
+import { Router } from "react-router-dom";
+import { createMemoryHistory } from "history";
 
 import App from "./App";
 
-test("renders learn react link", () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe("App", () => {
+  test("renders successfully.", () => {
+    const history = createMemoryHistory();
+    history.push("/");
+
+    render(
+      <Router location={history.location} navigator={history}>
+        <App />
+      </Router>
+    );
+
+    const linkElement = screen.getByText(/todos/i);
+    expect(linkElement).toBeInTheDocument();
+  });
 });

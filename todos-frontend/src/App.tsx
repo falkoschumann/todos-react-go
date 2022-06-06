@@ -1,26 +1,99 @@
-import React from "react";
+import { Route, Routes } from "react-router-dom";
+import { useCallback, useState } from "react";
 
-import "./App.css";
-import logo from "./logo.svg";
+import {
+  AddTodoCommand,
+  ClearCompletedCommand,
+  DestroyTodoCommand,
+  SaveTodoCommand,
+  SelectTodosQueryResult,
+  ToggleAllCommand,
+  ToggleTodoCommand,
+} from "./domain/messages";
+
+import TodosAPI from "./adapters/providers/TodosAPI";
+import TodosController from "./adapters/portals/TodosController";
 
 function App() {
+  const [selectedTodos, setSelectedTodos] = useState<SelectTodosQueryResult>();
+
+  const handleAddTodo = useCallback(async (c: AddTodoCommand) => {
+    const status = await TodosAPI.addTodo(c);
+    if (!status.success) {
+      console.error(status.errorMessage);
+    }
+    const result = await TodosAPI.selectTodos({});
+    setSelectedTodos(result);
+  }, []);
+
+  const handleClearCompleted = useCallback(async (c: ClearCompletedCommand) => {
+    const status = await TodosAPI.clearCompleted(c);
+    if (!status.success) {
+      console.log(status.errorMessage);
+    }
+    const result = await TodosAPI.selectTodos({});
+    setSelectedTodos(result);
+  }, []);
+
+  const handleDestroyTodo = useCallback(async (c: DestroyTodoCommand) => {
+    const status = await TodosAPI.destroyTodo(c);
+    if (!status.success) {
+      console.log(status.errorMessage);
+    }
+    const result = await TodosAPI.selectTodos({});
+    setSelectedTodos(result);
+  }, []);
+
+  const handleSaveTodo = useCallback(async (c: SaveTodoCommand) => {
+    const status = await TodosAPI.saveTodo(c);
+    if (!status.success) {
+      console.error(status.errorMessage);
+    }
+    const result = await TodosAPI.selectTodos({});
+    setSelectedTodos(result);
+  }, []);
+
+  const handleSelectTodos = useCallback(async () => {
+    const result = await TodosAPI.selectTodos({});
+    setSelectedTodos(result);
+  }, []);
+
+  const handleToggleAll = useCallback(async (c: ToggleAllCommand) => {
+    const status = await TodosAPI.toggleAll(c);
+    if (!status.success) {
+      console.error(status.errorMessage);
+    }
+    const result = await TodosAPI.selectTodos({});
+    setSelectedTodos(result);
+  }, []);
+
+  const handleToggleTodo = useCallback(async (c: ToggleTodoCommand) => {
+    const status = await TodosAPI.toggleTodo(c);
+    if (!status.success) {
+      console.error(status.errorMessage);
+    }
+    const result = await TodosAPI.selectTodos({});
+    setSelectedTodos(result);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route
+        path="/*"
+        element={
+          <TodosController
+            selectedTodos={selectedTodos}
+            onAddTodo={handleAddTodo}
+            onClearCompleted={handleClearCompleted}
+            onDestroyTodo={handleDestroyTodo}
+            onSaveTodo={handleSaveTodo}
+            onSelectTodos={handleSelectTodos}
+            onToggleAll={handleToggleAll}
+            onToggleTodo={handleToggleTodo}
+          />
+        }
+      />
+    </Routes>
   );
 }
 

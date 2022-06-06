@@ -1,7 +1,7 @@
 all: test linux mac-intel mac-m1 win
 
 run:
-	go run main.go
+	go run main.go --host localhost
 
 build:
 	go build
@@ -11,7 +11,11 @@ clean:
 	rm -rf ./build
 
 test:
-	go test
+	go test -v ./... -cover
+
+test-coverage:
+	go test ./... -coverprofile=coverage.out
+	go tool cover -html=coverage.out
 
 reformat:
 	go fmt
