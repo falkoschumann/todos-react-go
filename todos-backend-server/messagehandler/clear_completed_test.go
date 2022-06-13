@@ -12,7 +12,7 @@ func TestClearCompleted(t *testing.T) {
 		{Id: 1, Title: "Taste JavaScript", Completed: true},
 		{Id: 2, Title: "Buy Unicorn", Completed: false},
 	})
-	clearCompleted := GetClearCompleted(repo)
+	clearCompleted := ClearCompleted(repo)
 
 	status := clearCompleted(domain.ClearCompletedCommand{})
 

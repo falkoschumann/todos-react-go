@@ -1,24 +1,26 @@
 package portal
 
 import (
-	"encoding/json"
-	"log"
 	"net/http"
 	"todos_backend_server/domain"
 )
 
-func GetAddTodo(h domain.AddTodoCommandHandler) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
+func AddTodo(h domain.AddTodoCommandHandler) http.Handler {
+	return httpHandler(func(w http.ResponseWriter, r *http.Request) *httpError {
+		if err := isJSON(r); err != nil {
+			return err
+		}
+
 		var command domain.AddTodoCommand
-		err := json.NewDecoder(r.Body).Decode(&command)
-		if err != nil {
-			log.Println(err)
-			w.WriteHeader(http.StatusBadRequest)
-			return
+		if err := decodeJSON(r, &command); err != nil {
+			return err
 		}
 
 		status := h(command)
-		log.Println("Add todo", command, status)
-		json.NewEncoder(w).Encode(status)
-	}
+		if err := encodeJSON(w, status); err != nil {
+			return err
+		}
+
+		return nil
+	})
 }

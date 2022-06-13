@@ -1,24 +1,26 @@
 package portal
 
 import (
-	"encoding/json"
-	"log"
 	"net/http"
 	"todos_backend_server/domain"
 )
 
-func GetToggleTodo(h domain.ToggleTodoCommandHandler) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
+func ToggleTodo(h domain.ToggleTodoCommandHandler) http.Handler {
+	return httpHandler(func(w http.ResponseWriter, r *http.Request) *httpError {
+		if err := isJSON(r); err != nil {
+			return err
+		}
+
 		var command domain.ToggleTodoCommand
-		err := json.NewDecoder(r.Body).Decode(&command)
-		if err != nil {
-			log.Println(err)
-			w.WriteHeader(http.StatusBadRequest)
-			return
+		if err := decodeJSON(r, &command); err != nil {
+			return err
 		}
 
 		status := h(command)
-		log.Println("Toggle todo", command, status)
-		json.NewEncoder(w).Encode(status)
-	}
+		if err := encodeJSON(w, status); err != nil {
+			return err
+		}
+
+		return nil
+	})
 }

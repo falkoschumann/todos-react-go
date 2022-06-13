@@ -2,17 +2,17 @@ package messagehandler
 
 import "todos_backend_server/domain"
 
-func GetDestroyTodo(repo domain.TodosRepository) domain.DestroyTodoCommandHandler {
+func DestroyTodo(repo domain.TodosRepository) domain.DestroyTodoCommandHandler {
 	destroyTodo := func(todos []domain.Todo, id int) []domain.Todo {
-		var r []domain.Todo
+		var result []domain.Todo
 		for _, t := range todos {
 			if t.Id == id {
 				continue
 			}
 
-			r = append(r, t)
+			result = append(result, t)
 		}
-		return r
+		return result
 	}
 
 	return func(c domain.DestroyTodoCommand) domain.CommandStatus {

@@ -23,7 +23,6 @@ func (r *JsonTodosRepository) Load() []domain.Todo {
 	todos := []domain.Todo{}
 	f, err := os.Open(r.file)
 	if errors.Is(err, os.ErrNotExist) {
-		log.Println("No todos exist yet.")
 		return todos
 	}
 	if err != nil {
@@ -39,7 +38,6 @@ func (r *JsonTodosRepository) Load() []domain.Todo {
 	if todos == nil {
 		todos = []domain.Todo{}
 	}
-	log.Println("Todos loaded:", todos)
 	return todos
 }
 
@@ -57,5 +55,4 @@ func (r *JsonTodosRepository) Store(todos []domain.Todo) {
 		log.Println("Encoding todos file failed:", err)
 		return
 	}
-	log.Println("Todos stored:", todos)
 }

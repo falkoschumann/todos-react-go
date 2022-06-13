@@ -13,7 +13,7 @@ func TestToggleAll(t *testing.T) {
 			{Id: 1, Title: "Taste JavaScript", Completed: true},
 			{Id: 2, Title: "Buy Unicorn", Completed: false},
 		})
-		toggleAll := GetToggleAll(repo)
+		toggleAll := ToggleAll(repo)
 
 		status := toggleAll(domain.ToggleAllCommand{Checked: true})
 
@@ -34,7 +34,7 @@ func TestToggleAll(t *testing.T) {
 			{Id: 1, Title: "Taste JavaScript", Completed: true},
 			{Id: 2, Title: "Buy Unicorn", Completed: false},
 		})
-		toggleAll := GetToggleAll(repo)
+		toggleAll := ToggleAll(repo)
 
 		status := toggleAll(domain.ToggleAllCommand{Checked: false})
 

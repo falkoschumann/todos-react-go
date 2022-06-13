@@ -12,7 +12,7 @@ func TestAddTodo(t *testing.T) {
 		repo := newMemoryTodosRepository([]domain.Todo{
 			{Id: 1, Title: "Taste JavaScript", Completed: true},
 		})
-		addTodo := GetAddTodo(repo)
+		addTodo := AddTodo(repo)
 
 		status := addTodo(domain.AddTodoCommand{Title: "Buy Unicorn"})
 
@@ -32,7 +32,7 @@ func TestAddTodo(t *testing.T) {
 		repo := newMemoryTodosRepository([]domain.Todo{
 			{Id: 1, Title: "Taste JavaScript", Completed: true},
 		})
-		addTodo := GetAddTodo(repo)
+		addTodo := AddTodo(repo)
 
 		status := addTodo(domain.AddTodoCommand{Title: ""})
 

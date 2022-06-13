@@ -1,24 +1,26 @@
 package portal
 
 import (
-	"encoding/json"
-	"log"
 	"net/http"
 	"todos_backend_server/domain"
 )
 
-func GetSaveTodo(h domain.SaveTodoCommandHandler) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
+func SaveTodo(h domain.SaveTodoCommandHandler) http.Handler {
+	return httpHandler(func(w http.ResponseWriter, r *http.Request) *httpError {
+		if err := isJSON(r); err != nil {
+			return err
+		}
+
 		var command domain.SaveTodoCommand
-		err := json.NewDecoder(r.Body).Decode(&command)
-		if err != nil {
-			log.Println(err)
-			w.WriteHeader(http.StatusBadRequest)
-			return
+		if err := decodeJSON(r, &command); err != nil {
+			return err
 		}
 
 		status := h(command)
-		log.Println("Save todo", command, status)
-		json.NewEncoder(w).Encode(status)
-	}
+		if err := encodeJSON(w, status); err != nil {
+			return err
+		}
+
+		return nil
+	})
 }

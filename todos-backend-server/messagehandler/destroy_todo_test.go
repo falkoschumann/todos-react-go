@@ -12,7 +12,7 @@ func TestDestryTodo(t *testing.T) {
 		{Id: 1, Title: "Taste JavaScript", Completed: true},
 		{Id: 2, Title: "Buy Unicorn", Completed: false},
 	})
-	destroyTodo := GetDestroyTodo(repo)
+	destroyTodo := DestroyTodo(repo)
 
 	status := destroyTodo(domain.DestroyTodoCommand{Id: 2})
 

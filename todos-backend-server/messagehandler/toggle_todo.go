@@ -4,16 +4,16 @@ import (
 	"todos_backend_server/domain"
 )
 
-func GetToggleTodo(repo domain.TodosRepository) domain.ToggleTodoCommandHandler {
+func ToggleTodo(repo domain.TodosRepository) domain.ToggleTodoCommandHandler {
 	toggleAll := func(todos []domain.Todo, id int) []domain.Todo {
-		var r []domain.Todo
+		var result []domain.Todo
 		for _, t := range todos {
 			if t.Id == id {
 				t.Completed = !t.Completed
 			}
-			r = append(r, t)
+			result = append(result, t)
 		}
-		return r
+		return result
 	}
 
 	return func(c domain.ToggleTodoCommand) domain.CommandStatus {

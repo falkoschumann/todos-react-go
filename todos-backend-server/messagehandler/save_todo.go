@@ -4,16 +4,23 @@ import (
 	"todos_backend_server/domain"
 )
 
-func GetSaveTodo(repo domain.TodosRepository) domain.SaveTodoCommandHandler {
+func SaveTodo(repo domain.TodosRepository) domain.SaveTodoCommandHandler {
 	saveTodo := func(todos []domain.Todo, id int, newTitle string) []domain.Todo {
-		var r []domain.Todo
+		var result []domain.Todo
 		for _, t := range todos {
-			if t.Id == id {
-				t.Title = newTitle
+			if t.Id != id {
+				result = append(result, t)
+				continue
 			}
-			r = append(r, t)
+
+			if newTitle == "" {
+				continue
+			}
+
+			t.Title = newTitle
+			result = append(result, t)
 		}
-		return r
+		return result
 	}
 
 	return func(c domain.SaveTodoCommand) domain.CommandStatus {

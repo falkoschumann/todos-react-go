@@ -4,7 +4,7 @@ import (
 	"todos_backend_server/domain"
 )
 
-func GetAddTodo(repo domain.TodosRepository) domain.AddTodoCommandHandler {
+func AddTodo(repo domain.TodosRepository) domain.AddTodoCommandHandler {
 	getNextId := func(todos []domain.Todo) int {
 		var id = 0
 		for _, t := range todos {

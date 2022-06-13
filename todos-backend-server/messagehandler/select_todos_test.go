@@ -12,7 +12,7 @@ func TestSelectTodos(t *testing.T) {
 		{Id: 1, Title: "Taste JavaScript", Completed: true},
 		{Id: 2, Title: "Buy Unicorn", Completed: false},
 	})
-	selectTodo := GetSelectTodos(repo)
+	selectTodo := SelectTodos(repo)
 
 	result := selectTodo(domain.SelectTodosQuery{})
 

@@ -13,7 +13,7 @@ func TestToggleTodo(t *testing.T) {
 			{Id: 1, Title: "Taste JavaScript", Completed: true},
 			{Id: 2, Title: "Buy Unicorn", Completed: false},
 		})
-		toggleTodo := GetToggleTodo(repo)
+		toggleTodo := ToggleTodo(repo)
 
 		status := toggleTodo(domain.ToggleTodoCommand{Id: 1})
 
@@ -34,7 +34,7 @@ func TestToggleTodo(t *testing.T) {
 			{Id: 1, Title: "Taste JavaScript", Completed: true},
 			{Id: 2, Title: "Buy Unicorn", Completed: false},
 		})
-		toggleTodo := GetToggleTodo(repo)
+		toggleTodo := ToggleTodo(repo)
 
 		status := toggleTodo(domain.ToggleTodoCommand{Id: 2})
 

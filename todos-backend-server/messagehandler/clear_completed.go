@@ -2,15 +2,15 @@ package messagehandler
 
 import "todos_backend_server/domain"
 
-func GetClearCompleted(repo domain.TodosRepository) domain.ClearCompletedCommandHandler {
+func ClearCompleted(repo domain.TodosRepository) domain.ClearCompletedCommandHandler {
 	clearCompleted := func(todos []domain.Todo) []domain.Todo {
-		var r []domain.Todo
+		var result []domain.Todo
 		for _, t := range todos {
 			if !t.Completed {
-				r = append(r, t)
+				result = append(result, t)
 			}
 		}
-		return r
+		return result
 	}
 
 	return func(c domain.ClearCompletedCommand) domain.CommandStatus {
