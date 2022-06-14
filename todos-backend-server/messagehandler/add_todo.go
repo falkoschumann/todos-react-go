@@ -1,8 +1,6 @@
 package messagehandler
 
-import (
-	"todos_backend_server/domain"
-)
+import "todos_backend_server/domain"
 
 func AddTodo(repo domain.TodosRepository) domain.AddTodoCommandHandler {
 	getNextId := func(todos []domain.Todo) int {

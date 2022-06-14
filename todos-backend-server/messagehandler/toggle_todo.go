@@ -1,8 +1,6 @@
 package messagehandler
 
-import (
-	"todos_backend_server/domain"
-)
+import "todos_backend_server/domain"
 
 func ToggleTodo(repo domain.TodosRepository) domain.ToggleTodoCommandHandler {
 	toggleAll := func(todos []domain.Todo, id int) []domain.Todo {

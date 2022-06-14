@@ -8,7 +8,7 @@ build:
 
 clean:
 	go clean
-	rm -rf ./build
+	rm -rf ./build coverage.out
 
 test:
 	go test -v ./... -cover

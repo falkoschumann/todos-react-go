@@ -2,9 +2,10 @@ package messagehandler
 
 import (
 	"testing"
-	"todos_backend_server/domain"
 
 	"github.com/google/go-cmp/cmp"
+
+	"todos_backend_server/domain"
 )
 
 func TestSaveTodo(t *testing.T) {

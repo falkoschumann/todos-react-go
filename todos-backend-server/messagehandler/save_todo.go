@@ -1,8 +1,6 @@
 package messagehandler
 
-import (
-	"todos_backend_server/domain"
-)
+import "todos_backend_server/domain"
 
 func SaveTodo(repo domain.TodosRepository) domain.SaveTodoCommandHandler {
 	saveTodo := func(todos []domain.Todo, id int, newTitle string) []domain.Todo {
