@@ -13,7 +13,7 @@
 
 ### Queries
 
-- Select todos (filter: All|Active|Completed) : (id, title, completed)*
+- Select todos (id, title, completed)*
 
 ### Notifications
 
