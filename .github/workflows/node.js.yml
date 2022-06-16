@@ -3,6 +3,10 @@
 
 name: Node.js CI
 
+defaults:
+  run:
+    working-directory: todos-frontend
+
 on:
   push:
     branches: [main]
@@ -25,7 +29,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: cd todos-frontend
       - run: npm ci
       - run: npm run build
       - run: npm test
