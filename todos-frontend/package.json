@@ -25,6 +25,7 @@
   },
   "scripts": {
     "all": "npm run build && npm run test && npm run analyze",
+    "clean": "rm -rf ./build ./coverage",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false --coverage",

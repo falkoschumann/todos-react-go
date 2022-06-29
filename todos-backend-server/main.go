@@ -30,7 +30,9 @@ func createTodosRouter(r domain.TodosRepository) {
 }
 
 func createSpaRouter() {
-	http.Handle("/", portal.NewSpaHandler())
+	handler := portal.NewSpaHandler()
+	handler.StaticPath = "/static"
+	http.Handle("/", handler)
 }
 
 func runServer(host string, port uint) {
