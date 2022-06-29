@@ -1,0 +1,14 @@
+services:
+  backend:
+    build: todos-backend-server
+    volumes:
+      - todos-data:/opt/todos/data
+  frontend:
+    build: todos-frontend
+  proxy:
+    build: ./proxy
+    ports:
+      - 8080:80
+
+volumes:
+  todos-data:
