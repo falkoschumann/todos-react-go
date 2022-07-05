@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-import { ReactNode } from "react";
-import classNames from "classnames";
+import { Link } from 'react-router-dom';
+import { ReactNode } from 'react';
+import classNames from 'classnames';
 
-import { Filter, pluralize } from "./utils";
+import { Filter, pluralize } from './utils';
 
 type FooterProps = Readonly<{
   activeCount: number;
@@ -15,7 +15,7 @@ function Footer({ activeCount, completedCount, filter, onClearCompleted }: Foote
   return (
     <footer className="p-3 grid grid-cols-3 items-center text-sm border-t border-solid border-gray-200 shadow-xl">
       <div data-testid="todo-count">
-        <strong className="font-light">{activeCount}</strong> {pluralize(activeCount, "item")} left
+        <strong className="font-light">{activeCount}</strong> {pluralize(activeCount, 'item')} left
       </div>
       <nav>
         <ul className="flex justify-center">
@@ -54,11 +54,11 @@ function NavItem({ to, active, children }: NavItemProps) {
     <li>
       <Link
         to={to}
-        aria-current={active ? "page" : undefined}
+        aria-current={active ? 'page' : undefined}
         className={classNames({
-          "m-1 px-2 py-1": true,
-          "border border-solid border-transparent hover:border-red-300": !active,
-          "border border-red-500": active,
+          'm-1 px-2 py-1': true,
+          'border border-solid border-transparent hover:border-red-300': !active,
+          'border border-red-500': active,
         })}
       >
         {children}

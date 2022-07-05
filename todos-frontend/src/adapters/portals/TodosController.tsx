@@ -1,5 +1,5 @@
-import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 
 import {
   AddTodoCommand,
@@ -10,15 +10,15 @@ import {
   SelectTodosQueryResult,
   ToggleAllCommand,
   ToggleTodoCommand,
-} from "../../domain/messages";
-import { Todo, TodoId } from "../../domain/data";
+} from '../../domain/messages';
+import { Todo, TodoId } from '../../domain/data';
 
-import { Filter } from "./utils";
-import Footer from "./Footer";
-import Header from "./Header";
-import TodoItem from "./TodoItem";
-import TodoList from "./TodoList";
-import { useOnLoad } from "./hooks";
+import { Filter } from './utils';
+import Footer from './Footer';
+import Header from './Header';
+import TodoItem from './TodoItem';
+import TodoList from './TodoList';
+import { useOnLoad } from './hooks';
 
 type TodosControllerProps = Readonly<{
   selectedTodos?: SelectTodosQueryResult;
@@ -138,11 +138,11 @@ function useProjection(selectedTodos?: SelectTodosQueryResult): ProjectionResult
 
   let activeCount, completedCount, filter, shownTodos;
   switch (pathname) {
-    case "/active":
+    case '/active':
       filter = Filter.Active;
       shownTodos = selectedTodos.todos.filter((t) => !t.completed);
       break;
-    case "/completed":
+    case '/completed':
       filter = Filter.Completed;
       shownTodos = selectedTodos.todos.filter((t) => t.completed);
       break;

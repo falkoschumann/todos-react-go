@@ -1,12 +1,12 @@
-import { render, screen } from "@testing-library/react";
-import { Router } from "react-router-dom";
-import { createMemoryHistory } from "history";
+import { render, screen } from '@testing-library/react';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 
-import { Filter } from "./utils";
-import Footer from "./Footer";
+import { Filter } from './utils';
+import Footer from './Footer';
 
-describe("Footer", () => {
-  it("renders 1 todo with singular counter.", () => {
+describe('Footer', () => {
+  it('renders 1 todo with singular counter.', () => {
     const history = createMemoryHistory();
 
     render(
@@ -15,11 +15,11 @@ describe("Footer", () => {
       </Router>
     );
 
-    const countElement = screen.getByTestId("todo-count");
-    expect(countElement.textContent).toEqual("1 item left");
+    const countElement = screen.getByTestId('todo-count');
+    expect(countElement.textContent).toEqual('1 item left');
   });
 
-  it("renders multiple todos with plural counter.", () => {
+  it('renders multiple todos with plural counter.', () => {
     const history = createMemoryHistory();
 
     render(
@@ -28,11 +28,11 @@ describe("Footer", () => {
       </Router>
     );
 
-    const countElement = screen.getByTestId("todo-count");
-    expect(countElement.textContent).toEqual("2 items left");
+    const countElement = screen.getByTestId('todo-count');
+    expect(countElement.textContent).toEqual('2 items left');
   });
 
-  it("renders all as current page.", () => {
+  it('renders all as current page.', () => {
     const history = createMemoryHistory();
 
     render(
@@ -41,11 +41,11 @@ describe("Footer", () => {
       </Router>
     );
 
-    const linkElement: HTMLAnchorElement = screen.getByRole("link", { current: "page" });
-    expect(linkElement.text).toEqual("All");
+    const linkElement: HTMLAnchorElement = screen.getByRole('link', { current: 'page' });
+    expect(linkElement.text).toEqual('All');
   });
 
-  it("renders active as current page .", () => {
+  it('renders active as current page .', () => {
     const history = createMemoryHistory();
 
     render(
@@ -54,11 +54,11 @@ describe("Footer", () => {
       </Router>
     );
 
-    const linkElement: HTMLAnchorElement = screen.getByRole("link", { current: "page" });
-    expect(linkElement.text).toEqual("Active");
+    const linkElement: HTMLAnchorElement = screen.getByRole('link', { current: 'page' });
+    expect(linkElement.text).toEqual('Active');
   });
 
-  it("renders completed as current page.", () => {
+  it('renders completed as current page.', () => {
     const history = createMemoryHistory();
 
     render(
@@ -67,11 +67,11 @@ describe("Footer", () => {
       </Router>
     );
 
-    const linkElement: HTMLAnchorElement = screen.getByRole("link", { current: "page" });
-    expect(linkElement.text).toEqual("Completed");
+    const linkElement: HTMLAnchorElement = screen.getByRole('link', { current: 'page' });
+    expect(linkElement.text).toEqual('Completed');
   });
 
-  it("display clear completed button.", () => {
+  it('display clear completed button.', () => {
     const history = createMemoryHistory();
 
     render(
@@ -84,7 +84,7 @@ describe("Footer", () => {
     expect(buttonElement).toBeInTheDocument();
   });
 
-  it("do not display clear completed button.", () => {
+  it('do not display clear completed button.', () => {
     const history = createMemoryHistory();
 
     render(

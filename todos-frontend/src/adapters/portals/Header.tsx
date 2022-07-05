@@ -1,27 +1,25 @@
-import { ChangeEvent, KeyboardEvent, useState } from "react";
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 
 type HeaderProps = Readonly<{
   onAddTodo?: (title: string) => void;
 }>;
 
 function Header({ onAddTodo }: HeaderProps) {
-  const [newTodo, setNewTodo] = useState("");
+  const [newTodo, setNewTodo] = useState('');
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setNewTodo(event.target.value);
   }
 
   function handleNewTodoKeyDown(event: KeyboardEvent<HTMLInputElement>) {
-    if (event.code !== "Enter") {
+    if (event.code !== 'Enter') {
       return;
     }
 
     event.preventDefault();
     const title = newTodo.trim();
-    if (title) {
-      setNewTodo("");
-      onAddTodo?.(title);
-    }
+    onAddTodo?.(title);
+    setNewTodo('');
   }
 
   return (

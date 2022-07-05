@@ -1,13 +1,13 @@
-import { render, screen } from "@testing-library/react";
-import { Router } from "react-router-dom";
-import { createMemoryHistory } from "history";
+import { render, screen } from '@testing-library/react';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 
-import App from "./App";
+import App from './App';
 
-describe("App", () => {
-  test("renders successfully.", () => {
+describe('App', () => {
+  test('renders successfully.', () => {
     const history = createMemoryHistory();
-    history.push("/");
+    history.push('/');
 
     render(
       <Router location={history.location} navigator={history}>

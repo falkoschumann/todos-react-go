@@ -1,6 +1,6 @@
-import { ChangeEvent, ReactNode } from "react";
+import { ChangeEvent, ReactNode } from 'react';
 
-import { useCheckbox } from "./hooks";
+import { useCheckbox } from './hooks';
 
 type TodoListProps = Readonly<{
   activeCount: number;

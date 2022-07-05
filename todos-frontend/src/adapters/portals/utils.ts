@@ -1,7 +1,7 @@
 export enum Filter {
-  All = "all",
-  Active = "active",
-  Completed = "completed",
+  All = 'all',
+  Active = 'active',
+  Completed = 'completed',
 }
 
 export function pluralize(count: number, word: string) {

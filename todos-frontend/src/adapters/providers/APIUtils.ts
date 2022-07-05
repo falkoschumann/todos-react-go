@@ -1,7 +1,7 @@
 async function getJson(endpoint: string, parameter?: any) {
   let url = endpoint;
   if (parameter) {
-    endpoint += "?" + new URLSearchParams(parameter);
+    endpoint += '?' + new URLSearchParams(parameter);
   }
   const response = await fetch(url);
   if (!response.ok) {
@@ -14,11 +14,11 @@ async function getJson(endpoint: string, parameter?: any) {
 
 async function postJson(endpoint: string, payload: any) {
   const response = await fetch(endpoint, {
-    method: "POST",
+    method: 'POST',
     body: JSON.stringify(payload),
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
   });
   if (!response.ok) {

@@ -1,9 +1,9 @@
-import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
-import classNames from "classnames";
+import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
+import classNames from 'classnames';
 
-import { Todo } from "../../domain/data";
+import { Todo } from '../../domain/data';
 
-import { usePrevious } from "./hooks";
+import { usePrevious } from './hooks';
 
 type TodoItemProps = Readonly<{
   editing?: boolean;
@@ -41,10 +41,10 @@ function TodoItem({
 
   function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
     switch (event.key) {
-      case "Enter":
+      case 'Enter':
         handleSubmit();
         break;
-      case "Escape":
+      case 'Escape':
         setEditText(todo.title);
         onCancel?.();
         break;
@@ -89,9 +89,9 @@ function TodoItem({
       <label
         onDoubleClick={handleEdit}
         className={classNames({
-          "block p-4 pl-16 font-normal break-all": true,
-          "text-gray-400 line-through": todo.completed,
-          "text-gray-600": !todo.completed,
+          'block p-4 pl-16 font-normal break-all': true,
+          'text-gray-400 line-through': todo.completed,
+          'text-gray-600': !todo.completed,
         })}
       >
         {todo.title}

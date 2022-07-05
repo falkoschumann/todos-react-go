@@ -8,10 +8,10 @@ import {
   SelectTodosQueryResult,
   ToggleAllCommand,
   ToggleTodoCommand,
-} from "../../domain/messages";
-import APIUtils from "./APIUtils";
+} from '../../domain/messages';
+import APIUtils from './APIUtils';
 
-const baseUrl = "/api/todos";
+const baseUrl = '/api/todos';
 
 async function addTodo(c: AddTodoCommand): Promise<CommandStatus> {
   return APIUtils.postJson(`${baseUrl}/add-todo`, c);

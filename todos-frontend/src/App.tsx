@@ -1,5 +1,5 @@
-import { Route, Routes } from "react-router-dom";
-import { useCallback, useState } from "react";
+import { Route, Routes } from 'react-router-dom';
+import { useCallback, useState } from 'react';
 
 import {
   AddTodoCommand,
@@ -9,10 +9,10 @@ import {
   SelectTodosQueryResult,
   ToggleAllCommand,
   ToggleTodoCommand,
-} from "./domain/messages";
+} from './domain/messages';
 
-import TodosAPI from "./adapters/providers/TodosAPI";
-import TodosController from "./adapters/portals/TodosController";
+import TodosAPI from './adapters/providers/TodosAPI';
+import TodosController from './adapters/portals/TodosController';
 
 function App() {
   const [selectedTodos, setSelectedTodos] = useState<SelectTodosQueryResult>();
