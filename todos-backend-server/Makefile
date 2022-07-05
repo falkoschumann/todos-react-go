@@ -1,7 +1,7 @@
 all: test linux mac-intel mac-m1 win
 
 run:
-	go run main.go --host localhost
+	go run . --host localhost
 
 build:
 	go build

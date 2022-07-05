@@ -12,8 +12,8 @@ import (
 )
 
 func main() {
-	host, port := portal.ParseFlags()
-	repo := provider.NewJsonTodosRepository("./data/todos.json")
+	host, port, data := portal.ParseFlags()
+	repo := provider.NewJsonTodosRepository(data)
 	createBackendAPIRouter(repo)
 	createFrontendRouter()
 	runServer(host, port)

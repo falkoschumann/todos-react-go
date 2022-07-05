@@ -1,6 +1,9 @@
 services:
   backend:
     build: todos-backend-server
+    environment:
+      - TODOS_PORT=80
+      - TODOS_DATA=/opt/todos/data/todos.json
     volumes:
       - todos-data:/opt/todos/data
   frontend:
