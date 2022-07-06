@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-const ENV_PREFIX = "TODOS_"
+const envPrefix = "TODOS_"
 
 func ParseFlags() (host string, port uint, data string) {
 	flag.StringVar(&host, "host", "", "the server is listening on this `host` (default all)")
@@ -14,8 +14,14 @@ func ParseFlags() (host string, port uint, data string) {
 	flag.StringVar(&data, "data", "todos.json", "todos saved in this `file`")
 
 	flag.VisitAll(func(f *flag.Flag) {
-		k := ENV_PREFIX + strings.ToUpper(f.Name)
+		k := envPrefix + strings.ToUpper(f.Name)
+		if f.Value.String() != f.DefValue {
+			// CLI option overrides environment variable
+			return
+		}
+
 		if v, ok := os.LookupEnv(k); ok {
+			// Environment variable overrides default value of CLI option
 			f.Value.Set(v)
 		}
 	})

@@ -1,4 +1,7 @@
+# Build
 /build/
-/data/
 /*todos_backend_server*
 /coverage.out
+
+# Local testing
+/todos.json
