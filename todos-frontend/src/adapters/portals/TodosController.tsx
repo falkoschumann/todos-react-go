@@ -11,7 +11,7 @@ import {
   ToggleAllCommand,
   ToggleTodoCommand,
 } from '../../domain/messages';
-import { Todo, TodoId } from '../../domain/data';
+import { Todo, TodoId } from '../../domain/todo';
 
 import { Filter } from './utils';
 import Footer from './Footer';

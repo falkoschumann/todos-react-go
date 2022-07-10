@@ -1,4 +1,4 @@
-import { Todo, TodoId } from './data';
+import { Todo, TodoId } from './todo';
 
 export type CommandStatus = Readonly<{
   success: boolean;

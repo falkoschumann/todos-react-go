@@ -1,7 +1,7 @@
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 
-import { Todo } from '../../domain/data';
+import { Todo } from '../../domain/todo';
 
 import { usePrevious } from './hooks';
 
