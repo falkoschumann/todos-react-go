@@ -34,9 +34,9 @@ function TodoItem({
   }
 
   function handleSubmit() {
-    const value = editText.trim();
-    onSave?.(value);
-    setEditText(value);
+    const title = editText.trim();
+    onSave?.(title);
+    setEditText(title);
   }
 
   function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {

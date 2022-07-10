@@ -18,6 +18,10 @@ function Header({ onAddTodo }: HeaderProps) {
 
     event.preventDefault();
     const title = newTodo.trim();
+    if (!title) {
+      return;
+    }
+
     onAddTodo?.(title);
     setNewTodo('');
   }
