@@ -27,7 +27,8 @@ func TestToggleAll(t *testing.T) {
 			{Id: 1, Title: "Taste JavaScript", Completed: true},
 			{Id: 2, Title: "Buy Unicorn", Completed: true},
 		}
-		if diff := cmp.Diff(want, repo.Load()); diff != "" {
+		stored := repo.Load()
+		if diff := cmp.Diff(want, stored); diff != "" {
 			t.Errorf("Todos mismatch (-want +got):\n%s", diff)
 		}
 	})
@@ -48,7 +49,8 @@ func TestToggleAll(t *testing.T) {
 			{Id: 1, Title: "Taste JavaScript", Completed: false},
 			{Id: 2, Title: "Buy Unicorn", Completed: false},
 		}
-		if diff := cmp.Diff(want, repo.Load()); diff != "" {
+		stored := repo.Load()
+		if diff := cmp.Diff(want, stored); diff != "" {
 			t.Errorf("Todos mismatch (-want +got):\n%s", diff)
 		}
 	})
