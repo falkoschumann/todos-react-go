@@ -1,20 +1,22 @@
-package messagehandler
+package messagehandler_test
 
 import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 
+	"todos_backend_server/adapter/provider"
 	"todos_backend_server/domain"
+	"todos_backend_server/messagehandler"
 )
 
 func TestToggleTodo(t *testing.T) {
 	t.Run("activates a todo.", func(t *testing.T) {
-		repo := newMemoryTodosRepository([]domain.Todo{
+		repo := provider.NewMemoryTodosRepository([]domain.Todo{
 			{Id: 1, Title: "Taste JavaScript", Completed: true},
 			{Id: 2, Title: "Buy Unicorn", Completed: false},
 		})
-		toggleTodo := ToggleTodo(repo)
+		toggleTodo := messagehandler.ToggleTodo(repo)
 
 		status := toggleTodo(domain.ToggleTodoCommand{Id: 1})
 
@@ -31,11 +33,11 @@ func TestToggleTodo(t *testing.T) {
 	})
 
 	t.Run("completes a todo.", func(t *testing.T) {
-		repo := newMemoryTodosRepository([]domain.Todo{
+		repo := provider.NewMemoryTodosRepository([]domain.Todo{
 			{Id: 1, Title: "Taste JavaScript", Completed: true},
 			{Id: 2, Title: "Buy Unicorn", Completed: false},
 		})
-		toggleTodo := ToggleTodo(repo)
+		toggleTodo := messagehandler.ToggleTodo(repo)
 
 		status := toggleTodo(domain.ToggleTodoCommand{Id: 2})
 

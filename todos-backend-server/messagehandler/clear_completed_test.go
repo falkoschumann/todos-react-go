@@ -1,20 +1,22 @@
-package messagehandler
+package messagehandler_test
 
 import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 
+	"todos_backend_server/adapter/provider"
 	"todos_backend_server/domain"
+	"todos_backend_server/messagehandler"
 )
 
 func TestClearCompleted(t *testing.T) {
 	t.Run("removes completed todos.", func(t *testing.T) {
-		repo := newMemoryTodosRepository([]domain.Todo{
+		repo := provider.NewMemoryTodosRepository([]domain.Todo{
 			{Id: 1, Title: "Taste JavaScript", Completed: true},
 			{Id: 2, Title: "Buy Unicorn", Completed: false},
 		})
-		clearCompleted := ClearCompleted(repo)
+		clearCompleted := messagehandler.ClearCompleted(repo)
 
 		status := clearCompleted(domain.ClearCompletedCommand{})
 

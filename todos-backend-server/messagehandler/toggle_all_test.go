@@ -1,20 +1,22 @@
-package messagehandler
+package messagehandler_test
 
 import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 
+	"todos_backend_server/adapter/provider"
 	"todos_backend_server/domain"
+	"todos_backend_server/messagehandler"
 )
 
 func TestToggleAll(t *testing.T) {
 	t.Run("set all todos completed.", func(t *testing.T) {
-		repo := newMemoryTodosRepository([]domain.Todo{
+		repo := provider.NewMemoryTodosRepository([]domain.Todo{
 			{Id: 1, Title: "Taste JavaScript", Completed: true},
 			{Id: 2, Title: "Buy Unicorn", Completed: false},
 		})
-		toggleAll := ToggleAll(repo)
+		toggleAll := messagehandler.ToggleAll(repo)
 
 		status := toggleAll(domain.ToggleAllCommand{Checked: true})
 
@@ -31,11 +33,11 @@ func TestToggleAll(t *testing.T) {
 	})
 
 	t.Run("set all todos active.", func(t *testing.T) {
-		repo := newMemoryTodosRepository([]domain.Todo{
+		repo := provider.NewMemoryTodosRepository([]domain.Todo{
 			{Id: 1, Title: "Taste JavaScript", Completed: true},
 			{Id: 2, Title: "Buy Unicorn", Completed: false},
 		})
-		toggleAll := ToggleAll(repo)
+		toggleAll := messagehandler.ToggleAll(repo)
 
 		status := toggleAll(domain.ToggleAllCommand{Checked: false})
 

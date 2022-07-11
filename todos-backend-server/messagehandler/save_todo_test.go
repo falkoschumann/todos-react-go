@@ -1,20 +1,22 @@
-package messagehandler
+package messagehandler_test
 
 import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 
+	"todos_backend_server/adapter/provider"
 	"todos_backend_server/domain"
+	"todos_backend_server/messagehandler"
 )
 
 func TestSaveTodo(t *testing.T) {
 	t.Run("changes todos title.", func(t *testing.T) {
-		repo := newMemoryTodosRepository([]domain.Todo{
+		repo := provider.NewMemoryTodosRepository([]domain.Todo{
 			{Id: 1, Title: "Taste JavaScript", Completed: true},
 			{Id: 2, Title: "Buy Unicorn", Completed: false},
 		})
-		saveTodo := SaveTodo(repo)
+		saveTodo := messagehandler.SaveTodo(repo)
 
 		status := saveTodo(domain.SaveTodoCommand{Id: 1, NewTitle: "Taste TypeScript"})
 
@@ -31,11 +33,11 @@ func TestSaveTodo(t *testing.T) {
 	})
 
 	t.Run("destroys todo if title is empty.", func(t *testing.T) {
-		repo := newMemoryTodosRepository([]domain.Todo{
+		repo := provider.NewMemoryTodosRepository([]domain.Todo{
 			{Id: 1, Title: "Taste JavaScript", Completed: true},
 			{Id: 2, Title: "Buy Unicorn", Completed: false},
 		})
-		saveTodo := SaveTodo(repo)
+		saveTodo := messagehandler.SaveTodo(repo)
 
 		status := saveTodo(domain.SaveTodoCommand{Id: 1, NewTitle: ""})
 
