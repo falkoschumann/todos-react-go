@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import { Todo } from '../../domain/todo';
 
-import { usePrevious } from './hooks';
+import { usePrevious } from './usePrevious';
 
 type TodoItemProps = Readonly<{
   editing?: boolean;

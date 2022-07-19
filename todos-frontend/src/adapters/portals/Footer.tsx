@@ -2,7 +2,8 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { ReactNode } from 'react';
 
-import { Filter, pluralize } from './utils';
+import { Filter } from './Filter';
+import { pluralize } from './pluralize';
 
 type FooterProps = Readonly<{
   activeCount: number;

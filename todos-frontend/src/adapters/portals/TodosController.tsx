@@ -13,12 +13,12 @@ import {
 } from '../../domain/messages';
 import { Todo, TodoId } from '../../domain/todo';
 
-import { Filter } from './utils';
+import { Filter } from './Filter';
 import Footer from './Footer';
 import Header from './Header';
 import TodoItem from './TodoItem';
 import TodoList from './TodoList';
-import { useOnLoad } from './hooks';
+import { useOnLoad } from './useOnLoad';
 
 type TodosControllerProps = Readonly<{
   selectedTodos?: SelectTodosQueryResult;

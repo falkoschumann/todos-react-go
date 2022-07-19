@@ -20,23 +20,3 @@ export function useCheckbox({
   }, [checked, indeterminate]);
   return ref;
 }
-
-export function useOnLoad(callback: () => void) {
-  const firstRenderRef = useRef(true);
-  useEffect(() => {
-    if (!firstRenderRef.current) {
-      return;
-    }
-
-    firstRenderRef.current = false;
-    callback();
-  }, [callback]);
-}
-
-export function usePrevious(value: any) {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
-}

@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 
-import { Filter } from './utils';
+import { Filter } from './Filter';
 import Footer from './Footer';
 
 describe('Footer', () => {
