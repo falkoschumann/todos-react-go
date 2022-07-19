@@ -4,11 +4,11 @@ import {
   CommandStatus,
   DestroyTodoCommand,
   SaveTodoCommand,
-  SelectTodosQuery,
-  SelectTodosQueryResult,
   ToggleAllCommand,
   ToggleTodoCommand,
-} from '../../domain/messages';
+} from '../../domain/messages/commands';
+import { SelectTodosQuery, SelectTodosQueryResult } from '../../domain/messages/queries';
+
 import APIUtils from './APIUtils';
 
 const baseUrl = '/api/todos';

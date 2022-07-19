@@ -1,7 +1,7 @@
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 
-import { Todo } from '../../domain/todo';
+import { Todo } from '../../domain/data/Todo';
 
 import { usePrevious } from './usePrevious';
 

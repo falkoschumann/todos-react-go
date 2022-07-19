@@ -6,10 +6,10 @@ import {
   ClearCompletedCommand,
   DestroyTodoCommand,
   SaveTodoCommand,
-  SelectTodosQueryResult,
   ToggleAllCommand,
   ToggleTodoCommand,
-} from './domain/messages';
+} from './domain/messages/commands';
+import { SelectTodosQueryResult } from './domain/messages/queries';
 
 import TodosAPI from './adapters/providers/TodosAPI';
 import TodosController from './adapters/portals/TodosController';

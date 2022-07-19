@@ -6,12 +6,11 @@ import {
   ClearCompletedCommand,
   DestroyTodoCommand,
   SaveTodoCommand,
-  SelectTodosQuery,
-  SelectTodosQueryResult,
   ToggleAllCommand,
   ToggleTodoCommand,
-} from '../../domain/messages';
-import { Todo, TodoId } from '../../domain/todo';
+} from '../../domain/messages/commands';
+import { SelectTodosQuery, SelectTodosQueryResult } from '../../domain/messages/queries';
+import { Todo, TodoId } from '../../domain/data/Todo';
 
 import { Filter } from './Filter';
 import Footer from './Footer';

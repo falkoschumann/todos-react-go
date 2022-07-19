@@ -1,4 +1,4 @@
-import { Todo, TodoId } from './todo';
+import { TodoId } from '../data/Todo';
 
 export type CommandStatus = Readonly<{
   success: boolean;
@@ -26,10 +26,4 @@ export type ToggleAllCommand = Readonly<{
 
 export type ToggleTodoCommand = Readonly<{
   id: TodoId;
-}>;
-
-export type SelectTodosQuery = Readonly<{}>;
-
-export type SelectTodosQueryResult = Readonly<{
-  todos: readonly Todo[];
 }>;
