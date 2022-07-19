@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 
 import { Filter } from './utils';
 import Footer from './Footer';

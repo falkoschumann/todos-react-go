@@ -1,6 +1,6 @@
+import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { ReactNode } from 'react';
-import classNames from 'classnames';
 
 import { Filter, pluralize } from './utils';
 

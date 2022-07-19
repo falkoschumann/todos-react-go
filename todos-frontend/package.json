@@ -46,6 +46,7 @@
       "sort-imports": [
         "warn",
         {
+          "ignoreCase": true,
           "allowSeparatedGroups": true
         }
       ]
