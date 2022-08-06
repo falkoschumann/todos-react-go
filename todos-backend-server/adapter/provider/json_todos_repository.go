@@ -7,19 +7,20 @@ import (
 	"os"
 	"path"
 
-	"todos_backend_server/domain"
+	"todos_backend_server/domain/data"
+	"todos_backend_server/domain/port"
 )
 
 type JsonTodosRepository struct {
 	filepath string
 }
 
-func NewJsonTodosRepository(filepath string) *JsonTodosRepository {
+func NewJsonTodosRepository(filepath string) port.TodosRepository {
 	return &JsonTodosRepository{filepath: filepath}
 }
 
-func (r *JsonTodosRepository) Load() []domain.Todo {
-	todos := []domain.Todo{}
+func (r *JsonTodosRepository) Load() []data.Todo {
+	todos := []data.Todo{}
 
 	file, err := os.Open(r.filepath)
 	if errors.Is(err, os.ErrNotExist) {
@@ -36,12 +37,12 @@ func (r *JsonTodosRepository) Load() []domain.Todo {
 		return todos
 	}
 	if todos == nil {
-		todos = []domain.Todo{}
+		todos = []data.Todo{}
 	}
 	return todos
 }
 
-func (r *JsonTodosRepository) Store(todos []domain.Todo) {
+func (r *JsonTodosRepository) Store(todos []data.Todo) {
 	dir := path.Dir(r.filepath)
 	err := os.MkdirAll(dir, 0750)
 	if err != nil {

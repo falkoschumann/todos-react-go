@@ -8,10 +8,10 @@ import (
 
 const envPrefix = "TODOS_"
 
-func ParseFlags() (host string, port uint, data string) {
+func ParseFlags() (host string, port uint, dataDir string) {
 	flag.StringVar(&host, "host", "", "the server is listening on this `host` (default all)")
 	flag.UintVar(&port, "port", 8080, "the server is listening on this `port`")
-	flag.StringVar(&data, "data", "todos.json", "todos saved in this `file`")
+	flag.StringVar(&dataDir, "data", "todos.json", "todos saved in this `file`")
 
 	flag.VisitAll(func(f *flag.Flag) {
 		k := envPrefix + strings.ToUpper(f.Name)

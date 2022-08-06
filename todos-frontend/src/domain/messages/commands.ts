@@ -1,10 +1,5 @@
 import { TodoId } from '../data/Todo';
 
-export type CommandStatus = Readonly<{
-  success: boolean;
-  errorMessage?: string;
-}>;
-
 export type AddTodoCommand = Readonly<{
   title: string;
 }>;

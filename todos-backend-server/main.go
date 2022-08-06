@@ -7,31 +7,29 @@ import (
 
 	"todos_backend_server/adapter/portal"
 	"todos_backend_server/adapter/provider"
-	"todos_backend_server/domain"
-	"todos_backend_server/messagehandler"
+	"todos_backend_server/domain/messagehandler"
 )
 
 func main() {
-	host, port, data := portal.ParseFlags()
-	repo := provider.NewJsonTodosRepository(data)
-	createBackendAPIRouter(repo)
+	host, port, dataDir := portal.ParseFlags()
+	createBackendAPIRouter(dataDir)
 	createFrontendRouter()
 	runServer(host, port)
 }
 
-func createBackendAPIRouter(r domain.TodosRepository) {
-	http.Handle("/api/todos/add-todo", portal.AddTodo(messagehandler.AddTodo(r)))
-	http.Handle("/api/todos/clear-completed", portal.ClearCompleted(messagehandler.ClearCompleted(r)))
-	http.Handle("/api/todos/destroy-todo", portal.DestroyTodo(messagehandler.DestroyTodo(r)))
-	http.Handle("/api/todos/save-todo", portal.SaveTodo(messagehandler.SaveTodo(r)))
-	http.Handle("/api/todos/select-todos", portal.SelectTodos(messagehandler.SelectTodos(r)))
-	http.Handle("/api/todos/toggle-all", portal.ToggleAll(messagehandler.ToggleAll(r)))
-	http.Handle("/api/todos/toggle-todo", portal.ToggleTodo(messagehandler.ToggleTodo(r)))
+func createBackendAPIRouter(dataDir string) {
+	repo := provider.NewJsonTodosRepository(dataDir)
+	http.Handle("/api/todos/add-todo", portal.NewAddTodo(messagehandler.NewAddTodo(repo)))
+	http.Handle("/api/todos/clear-completed", portal.NewClearCompleted(messagehandler.NewClearCompleted(repo)))
+	http.Handle("/api/todos/destroy-todo", portal.NewDestroyTodo(messagehandler.NewDestroyTodo(repo)))
+	http.Handle("/api/todos/save-todo", portal.NewSaveTodo(messagehandler.NewSaveTodo(repo)))
+	http.Handle("/api/todos/select-todos", portal.NewSelectTodos(messagehandler.NewSelectTodos(repo)))
+	http.Handle("/api/todos/toggle-all", portal.NewToggleAll(messagehandler.NewToggleAll(repo)))
+	http.Handle("/api/todos/toggle-todo", portal.NewToggleTodo(messagehandler.NewToggleTodo(repo)))
 }
 
 func createFrontendRouter() {
 	handler := portal.NewSpaHandler()
-	handler.StaticPath = "/static"
 	http.Handle("/", handler)
 }
 

@@ -3,13 +3,13 @@ package portal
 import (
 	"net/http"
 
-	"todos_backend_server/domain"
+	"todos_backend_server/domain/message"
 )
 
-func SelectTodos(h domain.SelectTodosQueryHandler) http.Handler {
+func NewSelectTodos(handle message.SelectTodosQueryHandler) http.Handler {
 	return httpHandler(func(w http.ResponseWriter, r *http.Request) *httpError {
-		var query domain.SelectTodosQuery
-		result := h(query)
+		var query message.SelectTodosQuery
+		result := handle(query)
 		if err := encodeJSON(w, result); err != nil {
 			return err
 		}

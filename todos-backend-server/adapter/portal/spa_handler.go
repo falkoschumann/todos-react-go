@@ -17,7 +17,11 @@ type Handler struct {
 }
 
 func NewSpaHandler() *Handler {
-	return &Handler{RootPath: "www", IndexPath: "index.html"}
+	return &Handler{
+		RootPath:   "www",
+		IndexPath:  "index.html",
+		StaticPath: "/static",
+	}
 }
 
 func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {

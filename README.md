@@ -2,37 +2,35 @@
 
 ## User Stories
 
-### Lege Todo an
+### Create Todo
 
-- Wenn es keine Todos gibt, zeige nur Textfeld für neues Todo.
-- Fokusiere beim Start Textfeld für neues Todo.
-- Entferne Leerzeichen vor und nach Text.
-- Füge neues Todo nur hinzu, wenn Text nicht leer ist.
+- Focus new todo text field on startup.
+- If there are no todos, only display text field for new todo.
+- Remove spaces before and after text and only create todo if text is not empty.
 
-### Bearbeite Todo
+### Show Todos
 
-- Ein Todo in der Liste kann durch Doppelklick bearbeitet werden.
-- Wenn ein Todo bearbeitet wird, zeige nur Textfeld zum Bearbeiten.
-- Fokusiere beim Bearbeiten Textfeld.
-- Die Änderung am Todo wird durch `Enter` und Fokusverlust gesichert oder durch
-  `Escape` abgebrochen.
-- Entferne Leerzeichen vor und nach Text.
-- Wenn der Text leer ist, lösche Todo.
+- Show all todos.
+- Show only active or completed todos.
+- Display number of active todos.
 
-### Erledige Todo
+### Edit Todo
 
-- Ein Todo in der Liste kann als erledigt markiert werden.
-- Checkbox _Mark all as complete_ ist ausgewählt, wenn alle Todos erledigt sind,
-  sonst nicht.
+- Edit a todo in the list by double clicking and focus text field.
+- When editing a todo, only show text box for editing.
+- Save the change with `Enter` or if you lose focus and cancel the change with `Escape`.
+- Remove spaces before and after text and delete todo if text is empty.
 
-### Lösche Todo
+### Complete Todo
 
-- Ein Todo in der Liste kann gelöscht werden.
-- Blende Aktion _Clear completed_ aus, wenn es keine erledigten Todos gibt.
+- Mark a todo in the list as completed or active.
+- Mark all todos as completed or active.
 
-### Filtere Todos
+### Delete Todo
 
-- Filter Todos optional nach aktiv oder erledigt.
+- Delete a todo from the list.
+- Delete all completed todos.
+- If there are no completed todos, action delete completed todos is not available.
 
 ## Messages
 

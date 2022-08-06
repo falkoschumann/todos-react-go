@@ -1,13 +1,13 @@
 import {
   AddTodoCommand,
   ClearCompletedCommand,
-  CommandStatus,
   DestroyTodoCommand,
   SaveTodoCommand,
   ToggleAllCommand,
   ToggleTodoCommand,
 } from '../../domain/messages/commands';
 import { SelectTodosQuery, SelectTodosQueryResult } from '../../domain/messages/queries';
+import { CommandStatus } from '../../domain/messages/CommandStatus';
 
 import APIUtils from './APIUtils';
 
