@@ -12,11 +12,11 @@ import (
 )
 
 var toggleTodoTests = []struct {
-	name                string
-	givenStoredTodos    []data.Todo
-	command             message.ToggleTodoCommand
-	status              message.CommandStatus
-	expectedStoredTodos []data.Todo
+	name             string
+	givenStoredTodos []data.Todo
+	whenCommand      message.ToggleTodoCommand
+	thenStatus       message.CommandStatus
+	thenStoredTodos  []data.Todo
 }{
 	{
 		name: "activates a todo.",
@@ -24,9 +24,9 @@ var toggleTodoTests = []struct {
 			{Id: 1, Title: "Taste JavaScript", Completed: true},
 			{Id: 2, Title: "Buy Unicorn", Completed: false},
 		},
-		command: message.ToggleTodoCommand{Id: 1},
-		status:  message.MakeSuccess(),
-		expectedStoredTodos: []data.Todo{
+		whenCommand: message.ToggleTodoCommand{Id: 1},
+		thenStatus:  message.MakeSuccess(),
+		thenStoredTodos: []data.Todo{
 			{Id: 1, Title: "Taste JavaScript", Completed: false},
 			{Id: 2, Title: "Buy Unicorn", Completed: false},
 		},
@@ -37,9 +37,9 @@ var toggleTodoTests = []struct {
 			{Id: 1, Title: "Taste JavaScript", Completed: true},
 			{Id: 2, Title: "Buy Unicorn", Completed: false},
 		},
-		command: message.ToggleTodoCommand{Id: 2},
-		status:  message.MakeSuccess(),
-		expectedStoredTodos: []data.Todo{
+		whenCommand: message.ToggleTodoCommand{Id: 2},
+		thenStatus:  message.MakeSuccess(),
+		thenStoredTodos: []data.Todo{
 			{Id: 1, Title: "Taste JavaScript", Completed: true},
 			{Id: 2, Title: "Buy Unicorn", Completed: true},
 		},
@@ -52,13 +52,13 @@ func TestToggleTodo(t *testing.T) {
 			repo := provider.NewMemoryTodosRepository(tt.givenStoredTodos)
 			toggleTodo := messagehandler.NewToggleTodo(repo)
 
-			gotStatus := toggleTodo(tt.command)
+			gotStatus := toggleTodo(tt.whenCommand)
 			gotStoredTodos := repo.Load()
 
-			if !cmp.Equal(tt.status, gotStatus) {
-				t.Errorf("ToggleTodo(%v) = %v, want %v", tt.command, gotStatus, tt.status)
+			if !cmp.Equal(tt.thenStatus, gotStatus) {
+				t.Errorf("ToggleTodo(%v) = %v, want %v", tt.whenCommand, gotStatus, tt.thenStatus)
 			}
-			if diff := cmp.Diff(tt.expectedStoredTodos, gotStoredTodos); diff != "" {
+			if diff := cmp.Diff(tt.thenStoredTodos, gotStoredTodos); diff != "" {
 				t.Errorf("ToggleTodo() Stored todos mismatch (-want +got):\n%s", diff)
 			}
 		})

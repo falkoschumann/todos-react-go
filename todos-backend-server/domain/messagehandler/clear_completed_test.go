@@ -19,18 +19,18 @@ func TestClearCompleted(t *testing.T) {
 		})
 		clearCompleted := messagehandler.NewClearCompleted(repo)
 
-		cmd := message.ClearCompletedCommand{}
-		gotStatus := clearCompleted(cmd)
-		gotStoredTodos := repo.Load()
+		whenCommand := message.ClearCompletedCommand{}
+		status := clearCompleted(whenCommand)
+		storedTodos := repo.Load()
 
-		wantStatus := message.MakeSuccess()
-		if !cmp.Equal(wantStatus, gotStatus) {
-			t.Errorf("ClearCompleted(%v) = %v, want %v", cmd, gotStatus, wantStatus)
+		thenStatus := message.MakeSuccess()
+		if !cmp.Equal(thenStatus, status) {
+			t.Errorf("ClearCompleted(%v) = %v, want %v", whenCommand, status, thenStatus)
 		}
-		wantStoredTodos := []data.Todo{
+		thenStoredTodos := []data.Todo{
 			{Id: 2, Title: "Buy Unicorn", Completed: false},
 		}
-		if diff := cmp.Diff(wantStoredTodos, gotStoredTodos); diff != "" {
+		if diff := cmp.Diff(thenStoredTodos, storedTodos); diff != "" {
 			t.Errorf("ClearCompleted() stored todos mismatch (-want +got):\n%s", diff)
 		}
 	})
