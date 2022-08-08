@@ -12,12 +12,12 @@ import (
 
 func main() {
 	host, port, dataDir := portal.ParseFlags()
-	createBackendAPIRouter(dataDir)
-	createFrontendRouter()
+	initAPI(dataDir)
+	initClient()
 	runServer(host, port)
 }
 
-func createBackendAPIRouter(dataDir string) {
+func initAPI(dataDir string) {
 	repo := provider.NewJsonTodosRepository(dataDir)
 	http.Handle("/api/todos/add-todo", portal.NewAddTodo(messagehandler.NewAddTodo(repo)))
 	http.Handle("/api/todos/clear-completed", portal.NewClearCompleted(messagehandler.NewClearCompleted(repo)))
@@ -28,8 +28,8 @@ func createBackendAPIRouter(dataDir string) {
 	http.Handle("/api/todos/toggle-todo", portal.NewToggleTodo(messagehandler.NewToggleTodo(repo)))
 }
 
-func createFrontendRouter() {
-	handler := portal.NewSpaHandler()
+func initClient() {
+	handler := portal.NewSPA()
 	http.Handle("/", handler)
 }
 
