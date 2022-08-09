@@ -1,13 +1,11 @@
-import {
-  AddTodoCommand,
-  ClearCompletedCommand,
-  DestroyTodoCommand,
-  SaveTodoCommand,
-  ToggleAllCommand,
-  ToggleTodoCommand,
-} from '../../domain/messages/commands';
-import { SelectTodosQuery, SelectTodosQueryResult } from '../../domain/messages/queries';
+import { SelectTodosQuery, SelectTodosQueryResult } from '../../domain/messages/SelectTodosQuery';
+import { AddTodoCommand } from '../../domain/messages/AddTodoCommand';
+import { ClearCompletedCommand } from '../../domain/messages/ClearCompletedCommand';
 import { CommandStatus } from '../../domain/messages/CommandStatus';
+import { DestroyTodoCommand } from '../../domain/messages/DestroyTodoCommand';
+import { SaveTodoCommand } from '../../domain/messages/SaveTodoCommand';
+import { ToggleAllCommand } from '../../domain/messages/ToggleAllCommand';
+import { ToggleTodoCommand } from '../../domain/messages/ToggleTodoCommand';
 
 import APIUtils from './APIUtils';
 

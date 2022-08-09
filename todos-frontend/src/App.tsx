@@ -1,80 +1,79 @@
 import { Route, Routes } from 'react-router-dom';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
-import {
-  AddTodoCommand,
-  ClearCompletedCommand,
-  DestroyTodoCommand,
-  SaveTodoCommand,
-  ToggleAllCommand,
-  ToggleTodoCommand,
-} from './domain/messages/commands';
-import { SelectTodosQueryResult } from './domain/messages/queries';
+import { SelectTodosQuery, SelectTodosQueryResult } from './domain/messages/SelectTodosQuery';
+import { AddTodoCommand } from './domain/messages/AddTodoCommand';
+import { ClearCompletedCommand } from './domain/messages/ClearCompletedCommand';
+import { DestroyTodoCommand } from './domain/messages/DestroyTodoCommand';
+import { SaveTodoCommand } from './domain/messages/SaveTodoCommand';
+import { ToggleAllCommand } from './domain/messages/ToggleAllCommand';
+import { ToggleTodoCommand } from './domain/messages/ToggleTodoCommand';
+
+import TodosController from './adapters/portals/TodosController';
 
 import TodosAPI from './adapters/providers/TodosAPI';
-import TodosController from './adapters/portals/TodosController';
 
 function App() {
   const [selectedTodos, setSelectedTodos] = useState<SelectTodosQueryResult>();
 
-  const handleAddTodo = useCallback(async (c: AddTodoCommand) => {
-    const status = await TodosAPI.addTodo(c);
+  async function handleAddTodo(command: AddTodoCommand) {
+    const status = await TodosAPI.addTodo(command);
     if (!status.success) {
-      console.error(status.errorMessage);
+      console.error('Add todo failed:', status.errorMessage);
     }
     const result = await TodosAPI.selectTodos({});
     setSelectedTodos(result);
-  }, []);
+  }
 
-  const handleClearCompleted = useCallback(async (c: ClearCompletedCommand) => {
-    const status = await TodosAPI.clearCompleted(c);
+  async function handleClearCompleted(command: ClearCompletedCommand) {
+    const status = await TodosAPI.clearCompleted(command);
     if (!status.success) {
-      console.log(status.errorMessage);
+      console.log('Clear completed failed:', status.errorMessage);
     }
     const result = await TodosAPI.selectTodos({});
     setSelectedTodos(result);
-  }, []);
+  }
 
-  const handleDestroyTodo = useCallback(async (c: DestroyTodoCommand) => {
-    const status = await TodosAPI.destroyTodo(c);
+  async function handleDestroyTodo(command: DestroyTodoCommand) {
+    const status = await TodosAPI.destroyTodo(command);
     if (!status.success) {
-      console.log(status.errorMessage);
+      console.log('Destroy todo failed:', status.errorMessage);
     }
     const result = await TodosAPI.selectTodos({});
     setSelectedTodos(result);
-  }, []);
+  }
 
-  const handleSaveTodo = useCallback(async (c: SaveTodoCommand) => {
-    const status = await TodosAPI.saveTodo(c);
+  async function handleSaveTodo(command: SaveTodoCommand) {
+    const status = await TodosAPI.saveTodo(command);
     if (!status.success) {
-      console.error(status.errorMessage);
+      console.error('Save todo failed:', status.errorMessage);
     }
     const result = await TodosAPI.selectTodos({});
     setSelectedTodos(result);
-  }, []);
+  }
 
-  const handleSelectTodos = useCallback(async () => {
-    const result = await TodosAPI.selectTodos({});
+  async function handleSelectTodos(query: SelectTodosQuery) {
+    const result = await TodosAPI.selectTodos(query);
     setSelectedTodos(result);
-  }, []);
+  }
 
-  const handleToggleAll = useCallback(async (c: ToggleAllCommand) => {
-    const status = await TodosAPI.toggleAll(c);
+  async function handleToggleAll(command: ToggleAllCommand) {
+    const status = await TodosAPI.toggleAll(command);
     if (!status.success) {
-      console.error(status.errorMessage);
+      console.error('Toggle all failed:', status.errorMessage);
     }
     const result = await TodosAPI.selectTodos({});
     setSelectedTodos(result);
-  }, []);
+  }
 
-  const handleToggleTodo = useCallback(async (c: ToggleTodoCommand) => {
-    const status = await TodosAPI.toggleTodo(c);
+  async function handleToggleTodo(command: ToggleTodoCommand) {
+    const status = await TodosAPI.toggleTodo(command);
     if (!status.success) {
-      console.error(status.errorMessage);
+      console.error('Toggle todo failed:', status.errorMessage);
     }
     const result = await TodosAPI.selectTodos({});
     setSelectedTodos(result);
-  }, []);
+  }
 
   return (
     <Routes>

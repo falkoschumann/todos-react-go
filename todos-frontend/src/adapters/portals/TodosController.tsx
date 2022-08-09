@@ -1,16 +1,14 @@
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 
-import {
-  AddTodoCommand,
-  ClearCompletedCommand,
-  DestroyTodoCommand,
-  SaveTodoCommand,
-  ToggleAllCommand,
-  ToggleTodoCommand,
-} from '../../domain/messages/commands';
-import { SelectTodosQuery, SelectTodosQueryResult } from '../../domain/messages/queries';
+import { SelectTodosQuery, SelectTodosQueryResult } from '../../domain/messages/SelectTodosQuery';
 import { Todo, TodoId } from '../../domain/data/Todo';
+import { AddTodoCommand } from '../../domain/messages/AddTodoCommand';
+import { ClearCompletedCommand } from '../../domain/messages/ClearCompletedCommand';
+import { DestroyTodoCommand } from '../../domain/messages/DestroyTodoCommand';
+import { SaveTodoCommand } from '../../domain/messages/SaveTodoCommand';
+import { ToggleAllCommand } from '../../domain/messages/ToggleAllCommand';
+import { ToggleTodoCommand } from '../../domain/messages/ToggleTodoCommand';
 
 import { Filter } from './Filter';
 import Footer from './Footer';
@@ -34,7 +32,7 @@ function TodosController({
   selectedTodos,
   onAddTodo,
   onClearCompleted,
-  onDestroyTodo: onDestroy,
+  onDestroyTodo,
   onSaveTodo,
   onSelectTodos,
   onToggleAll,
@@ -55,7 +53,7 @@ function TodosController({
   }
 
   function handleDestroy(id: TodoId) {
-    onDestroy({ id });
+    onDestroyTodo({ id });
   }
 
   function handleEdit(id: TodoId) {
